@@ -51,12 +51,17 @@ project final/
 
 - Node.js (v18+ recommended)
 - Python 3.10+
-- MongoDB (local or cloud)
-- (Optional) Docker for Python backend
+- MongoDB (local or cloud, e.g., MongoDB Atlas)
+- (Optional) Docker for containerizing the AI service
 
----
+## Installation and Setup
 
-## Setup & Run Instructions
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/krishisathi-smartfarmernepal/KrishiSathi_Project_Final.git
+cd krishi_sathi
+```
 
 ### 1. Backend (Node.js/Express)
 
