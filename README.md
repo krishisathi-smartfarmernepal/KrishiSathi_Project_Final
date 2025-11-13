@@ -49,10 +49,10 @@ project final/
 
 ## Prerequisites
 
-- Node.js (v18+ recommended)
-- Python 3.10+
-- MongoDB (local or cloud, e.g., MongoDB Atlas)
-- (Optional) Docker for containerizing the AI service
+- **Node.js** (v18+ recommended)
+- **Python** 3.10+
+- **MongoDB** (local installation with MongoDB Compass or cloud via MongoDB Atlas)
+- **Docker** (optional, for containerizing the AI service)
 
 ## Installation and Setup
 
@@ -63,13 +63,45 @@ git clone https://github.com/krishisathi-smartfarmernepal/KrishiSathi_Project_Fi
 cd krishi_sathi
 ```
 
-### 1. Backend (Node.js/Express)
+### 2. Set Up MongoDB Database
+
+#### Option A: Local MongoDB with Compass (Recommended for Development)
+
+1. **Download and Install MongoDB Community Server**:
+   - Go to [MongoDB Download Center](https://www.mongodb.com/try/download/community)
+   - Select your OS (Windows) and download the MSI installer
+   - Run the installer and follow the setup wizard
+   - Choose "Complete" installation
+
+2. **Download and Install MongoDB Compass**:
+   - Go to [MongoDB Compass Download](https://www.mongodb.com/try/download/compass)
+   - Download and install the GUI tool for managing MongoDB
+
+3. **Start MongoDB Service**:
+   - Open Command Prompt as Administrator
+   - Run: `net start MongoDB` (or use Windows Services to start it)
+   - MongoDB will run on `mongodb://localhost:27017`
+
+4. **Create Database (Optional)**:
+   - Open MongoDB Compass
+   - Connect to `mongodb://localhost:27017`
+   - The database `krishi-sathi-DB` will be created automatically when you first run the app
+   - Collections (tables) for farmers, admins, etc. will also be created automatically
+
+#### Option B: MongoDB Atlas (Cloud Database)
+
+1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas)
+2. Create a free account and cluster
+3. Get your connection string from the "Connect" button
+4. It will look like: `mongodb+srv://username:password@cluster.mongodb.net/krishi-sathi-DB`
+
+### 3. Backend Setup
 
 ```bash
 cd backend
 npm install
 # Create a .env file with your MongoDB URI:
-# MONGO_URI=mongodb://localhost:27017/krishisathi
+# MONGO_URI=mongodb://localhost:27017/krishi-sathi-DB
 npm run dev
 ```
 Server runs on `http://localhost:5000`
