@@ -137,6 +137,34 @@ docker build -t crop-disease-ai .
 docker run -p 8000:8000 crop-disease-ai
 ```
 
+## Environment Variables
+
+### Backend (.env in backend/ directory)
+Create a `.env` file in the `backend` folder with the following variables:
+
+```env
+MONGO_URI=mongodb://localhost:27017/krishi-sathi-DB
+JWT_SECRET=your_jwt_secret_here
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password
+PORT=5000
+```
+
+- `MONGO_URI`: MongoDB connection string (local or Atlas)
+- `JWT_SECRET`: Secret key for JWT token generation
+- `EMAIL_USER`: Email address for sending notifications
+- `EMAIL_PASS`: Email password or app password
+- `PORT`: Server port (default: 5000)
+
+### Frontend (.env in root/ directory)
+Create a `.env` file in the root directory with:
+
+```env
+VITE_CHATBOT_API_KEY=your_chatbot_api_key_here
+```
+
+- `VITE_CHATBOT_API_KEY`: API key for the chatbot service (starts with VITE_ for Vite to expose it)
+
 ---
 
 ## Usage
