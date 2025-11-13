@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+  <!-- Green-100 background circle -->
+  <circle cx="12" cy="12" r="12" fill="#dcfce7"/>
+  <!-- Lucide Leaf icon in green-600 -->
+  <path d="M2 22s16-4 20-20C6 2 2 22 2 22z" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M2 22c4-4 8-8 12-12" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
