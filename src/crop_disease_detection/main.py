@@ -37,9 +37,9 @@ logger = logging.getLogger("uvicorn")
 try:
     hf_token = os.getenv("HF_TOKEN")  # optional for private HF repo
     model = load_model(token=hf_token)
-    logger.info("✅ Model loaded successfully at startup")
+    logger.info("Model loaded successfully at startup")
 except Exception as e:
-    logger.error(f"❌ Failed to load model: {e}")
+    logger.error(f"Failed to load model: {e}")
     model = None
 
 # -------------------------------
