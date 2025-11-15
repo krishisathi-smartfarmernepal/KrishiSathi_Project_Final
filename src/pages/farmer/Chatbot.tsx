@@ -95,7 +95,7 @@ const Chatbot: React.FC = () => {
   // OpenRouter API (same as chatbotx/index.html)
   const AI_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
   // Use environment variable for API key (see .env and Vite docs)
-  const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
+  const API_KEY = import.meta.env.VITE_CHATBOT_API_KEY;
   const MODEL = 'google/gemma-3n-e4b-it:free';
 
   const defaultMessage: Message = {
@@ -215,7 +215,7 @@ const Chatbot: React.FC = () => {
       const response = await fetch('/api/chat/sessions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${API_KEY}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
@@ -410,7 +410,7 @@ User question: ${userMessage}`;
         const sessionResponse = await fetch('/api/chat/sessions', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${API_KEY}}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
