@@ -162,7 +162,13 @@ const CropDiseaseDetection: React.FC = () => {
         throw new Error(`Failed to get detection result (${res.status})`);
       }
       
-      const data = await res.json();
+      let data: any;
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        console.error('Failed to parse JSON from AI API response:', parseErr);
+        throw parseErr;
+      }
       
       // Transform Python response to match frontend interface
       // Python returns: { label, confidence, description, remedy }

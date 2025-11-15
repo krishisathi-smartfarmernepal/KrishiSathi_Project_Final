@@ -25,36 +25,54 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
-    const allowedTypes = /jpeg|jpg|png|gif/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
-    
-    if (mimetype && extname) {
+    // Allow common image extensions and mimetypes (include webp, bmp, tiff)
+    const allowedTypes = /jpeg|jpg|png|gif|webp|bmp|tiff|tif/;
+    const ext = path.extname(file.originalname || '').toLowerCase().replace('.', '');
+    const mimePart = (file.mimetype || '').split('/').pop();
+
+    const extOk = allowedTypes.test(ext);
+    const mimeOk = allowedTypes.test(mimePart);
+
+    // Accept if either extension OR mimetype indicates an image (more permissive)
+    if (extOk || mimeOk) {
       return cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed!'));
     }
+
+    // Reject non-image files
+    cb(new Error('Only image files are allowed!'));
   }
 });
 
 // Save disease detection result with image
 router.post('/save', jwtAuth, upload.single('image'), async (req, res) => {
   try {
-    const { disease, confidence, severity, treatment, prevention } = req.body;
+    // Ensure JWT middleware provided user info
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: 'Unauthorized: missing user information' });
+    }
+
+    const { disease, confidence, severity, treatment, prevention } = req.body || {};
     
     // Get image path if uploaded
     let imageUrl = null;
     if (req.file) {
       imageUrl = `/uploads/disease-images/${req.file.filename}`;
     }
+    // Basic validation and sanitization
+    if (!disease) return res.status(400).json({ message: 'Missing disease name' });
+    const confNum = parseFloat(confidence);
+    const confVal = Number.isFinite(confNum) ? confNum : 0;
+    const sev = severity || 'None';
+    const treat = treatment || 'Not specified';
+    const prevent = prevention || 'Not specified';
     
     const detection = new DiseaseDetection({
       farmer: req.user.id,
       disease,
-      confidence: parseFloat(confidence),
-      severity,
-      treatment,
-      prevention,
+      confidence: confVal,
+      severity: sev,
+      treatment: treat,
+      prevention: prevent,
       imageUrl
     });
 

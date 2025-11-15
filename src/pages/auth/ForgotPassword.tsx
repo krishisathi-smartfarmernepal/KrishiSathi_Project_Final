@@ -73,21 +73,33 @@ const ForgotPassword: React.FC = () => {
 
         {phase === 'request' && (
           <form onSubmit={requestOtp}>
-            <label className="block mb-2 text-gray-700">Email Address</label>
-            <input
-              type="email"
-              className="w-full p-2 border rounded mb-4"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
+            <label className="block mb-2 text-gray-700 font-semibold">Email Address</label>
+            <div className="relative mb-4">
+                    <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      {/* Mail icon from Login.tsx (lucide-react) */}
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </span>
+                  <input
+                    type="email"
+                    className="w-full pl-10 p-3 border border-blue-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-gray-400 bg-white"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    required
+                  />
+            </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+              className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               disabled={loading}
             >
               {loading ? 'Sending...' : 'Send OTP'}
             </button>
+              <div className="mt-4 text-center">
+                 <a href="/login" className="text-sm text-blue-600 hover:text-blue-800">Back to Login</a>
+              </div>
           </form>
         )}
 
